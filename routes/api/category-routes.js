@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
   // create a new category
   try {
     const userData = await Category.create(req.body);
-    res.status(200).json({ message: 'Success! New Tag Created'});
+    res.status(200).json({ message: 'Success! New Category Created'});
 
   } catch {
     res.status(500).json({ message: 'Something went wrong'});
@@ -66,7 +66,7 @@ router.put('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json({message: 'Success! Tag Updated!'});
+    res.status(200).json({message: 'Success! Category Updated!'});
 
   } catch {
     res.status(500).json( { message: 'Something went wrong'});
@@ -87,7 +87,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json({ message: 'Success! Tag Deleted!'})
+    res.status(200).json({ message: 'Success! Category Deleted!'})
   } catch {
     res.status(500).json({ message: 'Something went wrong'});
   }

@@ -110,7 +110,7 @@ router.put('/:id', (req, res) => {
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.json({updatedProductTags}))
     .catch((err) => {
       // console.log(err);
       res.status(400).json(err);
@@ -130,7 +130,7 @@ router.delete('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json({ message: 'Success! Tag Deleted!'})
+    res.status(200).json({ message: 'Success! Product Deleted!'})
   } catch {
     res.status(500).json({ message: 'Something went wrong'});
   }
