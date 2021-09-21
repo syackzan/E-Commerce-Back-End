@@ -24,7 +24,9 @@ router.get('/:id', async (req, res) => {
 
   try {
 
-    const userData = await Category.findByPk(req.body.id);
+    const userData = await Category.findByPk(req.params.id, {
+      include: [{ model: Product}],
+    });
 
     if (!userData){
       res.status(404).json({ message: 'User could not be found' });
@@ -49,7 +51,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
 
@@ -72,7 +74,7 @@ router.put('/:id', (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
     const userData = await Category.destroy({
