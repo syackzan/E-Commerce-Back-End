@@ -38,16 +38,57 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
+  try {
+    const userData = await Category.create(req.body);
+    res.status(200).json({ message: 'Success! New Tag Created'});
+
+  } catch {
+    res.status(500).json({ message: 'Something went wrong'});
+  }
 });
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
+  try {
+
+    const userData = await Category.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+
+    if (!userData){
+      res.status(404).json({ message: 'No User Found'});
+      return;
+    }
+
+    res.status(200).json({message: 'Success! Tag Updated!'});
+
+  } catch {
+    res.status(500).json( { message: 'Something went wrong'});
+  }
+
 });
 
 router.delete('/:id', (req, res) => {
   // delete a category by its `id` value
+  try {
+    const userData = await Category.destroy({
+      where: {
+        id: req.params.id,
+      }
+    })
+    if (!userData){
+      res.status(404).json({ message: 'No user found'});
+      return;
+    }
+
+    res.status(200).json({ message: 'Success! Tag Deleted!'})
+  } catch {
+    res.status(500).json({ message: 'Something went wrong'});
+  }
 });
 
 module.exports = router;
