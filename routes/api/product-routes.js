@@ -103,6 +103,21 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
+  try {
+    const userData = await Product.destroy({
+      where: {
+        id: req.params.id,
+      }
+    })
+    if (!userData){
+      res.status(404).json({ message: 'No user found'});
+      return;
+    }
+
+    res.status(200).json({ message: 'Success! Tag Deleted!'})
+  } catch {
+    res.status(500).json({ message: 'Something went wrong'});
+  }
 });
 
 module.exports = router;
